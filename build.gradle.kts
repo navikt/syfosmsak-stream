@@ -12,16 +12,15 @@ val ktorVersion = "2.3.2"
 val logstashLogbackEncoder = "7.4"
 val logbackVersion = "1.4.8"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "1.9df1108"
+val smCommonVersion = "1.0.9"
 val junitJupiterVersion = "5.9.3"
 val ioMockVersion = "1.13.5"
 val kotlinVersion = "1.8.22"
-val pdfboxVersion = "2.0.28"
-val googleCloudStorageVersion = "2.23.0"
+val ktfmtVersion = "0.44"
 
 plugins {
     kotlin("jvm") version "1.8.22"
-    id("org.jmailen.kotlinter") version "3.15.0"
+    id("com.diffplug.spotless") version "6.19.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("org.cyclonedx.bom") version "1.7.4"
 }
@@ -69,10 +68,6 @@ dependencies {
     implementation("org.apache.kafka:kafka_2.12:$kafkaVersion")
     implementation("no.nav.helse:syfosm-common-models:$smCommonVersion")
     implementation("no.nav.helse:syfosm-common-kafka:$smCommonVersion")
-    implementation("no.nav.helse:syfosm-common-diagnosis-codes:$smCommonVersion")
-
-    implementation("org.apache.pdfbox:pdfbox:$pdfboxVersion")
-    implementation("com.google.cloud:google-cloud-storage:$googleCloudStorageVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
@@ -112,8 +107,11 @@ tasks {
         kotlinOptions.jvmTarget = "17"
     }
 
-    "check" {
-        dependsOn("formatKotlin")
+    spotless {
+        kotlin { ktfmt(ktfmtVersion).kotlinlangStyle() }
+        check {
+            dependsOn("spotlessApply")
+        }
     }
 }
 
