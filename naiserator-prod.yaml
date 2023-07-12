@@ -8,8 +8,8 @@ metadata:
 spec:
   image: {{ image }}
   replicas:
-    min: 3
-    max: 6
+    min: 2
+    max: 4
     cpuThresholdPercentage: 90
   port: 8080
   liveness:
@@ -30,7 +30,7 @@ spec:
     limits:
       memory: 2Gi
     requests:
-      cpu: 300m
+      cpu: 100m
       memory: 1256Mi
   kafka:
     pool: nav-prod
