@@ -28,7 +28,7 @@ spec:
     path: /prometheus
   resources:
     limits:
-      memory: 2Gi
+      memory: 3Gi
     requests:
       cpu: 100m
       memory: 1256Mi
