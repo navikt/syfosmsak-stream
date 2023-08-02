@@ -16,7 +16,9 @@ val smCommonVersion = "1.0.9"
 val junitJupiterVersion = "5.10.0"
 val ioMockVersion = "1.13.5"
 val kotlinVersion = "1.9.0"
+val commonsCodecVersion = "1.16.0"
 val ktfmtVersion = "0.44"
+val jvmVersion = "17"
 
 plugins {
     kotlin("jvm") version "1.9.0"
@@ -57,6 +59,8 @@ dependencies {
     implementation("io.ktor:ktor-server-call-id:$ktorVersion")
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-apache:$ktorVersion")
+    // override transient version from io.ktor:ktor-client-apache
+    implementation("commons-codec:commons-codec:$commonsCodecVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
 
@@ -104,7 +108,7 @@ tasks {
     }
 
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
+        kotlinOptions.jvmTarget = jvmVersion
     }
 
     spotless {
