@@ -9,7 +9,7 @@ spec:
   image: {{ image }}
   replicas:
     min: 2
-    max: 4
+    max: 6
     cpuThresholdPercentage: 90
   port: 8080
   liveness:
@@ -31,7 +31,7 @@ spec:
       memory: 3Gi
     requests:
       cpu: 200m
-      memory: 1500Mi
+      memory: 1600Mi
   kafka:
     pool: nav-prod
     streams: true
