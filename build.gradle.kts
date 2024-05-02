@@ -12,7 +12,7 @@ val smCommonVersion = "2.0.8"
 val junitJupiterVersion = "5.10.2"
 val ioMockVersion = "1.13.10"
 val kotlinVersion = "1.9.23"
-val commonsCodecVersion = "1.16.1"
+val commonsCodecVersion = "1.17.0"
 val ktfmtVersion = "0.44"
 val snappyJavaVersion = "1.1.10.5"
 
