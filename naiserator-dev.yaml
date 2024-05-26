@@ -36,10 +36,10 @@ spec:
         - id: elastic
   resources:
     limits:
-      memory: 1Gi
+      memory: 3Gi
     requests:
       cpu: 50m
-      memory: 512Mi
+      memory: 756Mi
   kafka:
     pool: nav-dev
     streams: true
