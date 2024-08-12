@@ -8,7 +8,6 @@ val ktorVersion = "2.3.12"
 val logstashLogbackEncoder = "8.0"
 val logbackVersion = "1.5.6"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "2.0.8"
 val junitJupiterVersion = "5.10.3"
 val ioMockVersion = "1.13.12"
 val kotlinVersion = "2.0.10"
@@ -63,13 +62,12 @@ dependencies {
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashLogbackEncoder")
 
     implementation("org.apache.kafka:kafka_2.12:$kafkaVersion")
+    implementation("org.apache.kafka:kafka-streams:$kafkaVersion")
     constraints {
         implementation("org.xerial.snappy:snappy-java:$snappyJavaVersion") {
             because("override transient from org.apache.kafka:kafka_2.12")
         }
     }
-    implementation("no.nav.helse:syfosm-common-models:$smCommonVersion")
-    implementation("no.nav.helse:syfosm-common-kafka:$smCommonVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")

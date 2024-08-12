@@ -11,7 +11,7 @@ persist
 
 #### Requirements
 
-* JDK 17
+* JDK 21
 
 ## Getting started
 ### Building the application
