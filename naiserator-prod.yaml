@@ -39,7 +39,7 @@ spec:
       memory: 3Gi
     requests:
       cpu: 100m
-      memory: 1024Mi
+      memory: 756Mi
   kafka:
     pool: nav-prod
     streams: true
