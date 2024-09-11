@@ -13,7 +13,7 @@ val ioMockVersion = "1.13.12"
 val kotlinVersion = "2.0.20"
 val commonsCodecVersion = "1.17.1"
 val ktfmtVersion = "0.44"
-val snappyJavaVersion = "1.1.10.6"
+val snappyJavaVersion = "1.1.10.7"
 
 plugins {
     id("application")
