@@ -16,6 +16,7 @@ import no.nav.syfo.kafka.aiven.KafkaUtils
 import no.nav.syfo.kafka.toStreamsConfig
 import no.nav.syfo.model.ReceivedSykmelding
 import no.nav.syfo.model.ValidationResult
+import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.streams.KafkaStreams
 import org.apache.kafka.streams.StreamsBuilder
@@ -63,6 +64,13 @@ fun startKafkaAivenStream(env: Environment, applicationState: ApplicationState) 
         KafkaUtils.getAivenKafkaConfig("sykmelding-stream")
             .toStreamsConfig(env.applicationName, Serdes.String()::class, Serdes.String()::class)
     streamProperties[StreamsConfig.APPLICATION_ID_CONFIG] = env.applicationId
+    streamProperties[StreamsConfig.producerPrefix(ProducerConfig.COMPRESSION_TYPE_CONFIG)] =
+        "snappy"
+    streamProperties[StreamsConfig.producerPrefix(ProducerConfig.BATCH_SIZE_CONFIG)] =
+        32.times(1024).toString()
+    streamProperties[StreamsConfig.producerPrefix(ProducerConfig.MAX_REQUEST_SIZE_CONFIG)] =
+        5.times(1024).times(1000).toString()
+
     val inputStream =
         streamsBuilder
             .stream(
