@@ -13,10 +13,9 @@ import no.nav.syfo.application.ApplicationServer
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.createApplicationEngine
 import no.nav.syfo.kafka.aiven.KafkaUtils
-import no.nav.syfo.kafka.toStreamsConfig
+import no.nav.syfo.kafka.aiven.KafkaUtils.Companion.toStreamsConfig
 import no.nav.syfo.model.ReceivedSykmelding
 import no.nav.syfo.model.ValidationResult
-import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.streams.KafkaStreams
 import org.apache.kafka.streams.StreamsBuilder
