@@ -9,17 +9,17 @@ val javaVersion = JvmTarget.JVM_21
 val coroutinesVersion = "1.9.0"
 val jacksonVersion = "2.18.2"
 val kafkaVersion = "3.9.0"
-val ktorVersion = "3.0.1"
+val ktorVersion = "3.0.3"
 val logstashLogbackEncoder = "8.0"
-val logbackVersion = "1.5.12"
+val logbackVersion = "1.5.13"
 val prometheusVersion = "0.16.0"
-val junitJupiterVersion = "5.11.3"
+val junitJupiterVersion = "5.11.4"
 val ioMockVersion = "1.13.13"
 val kotlinVersion = "2.1.0"
 val ktfmtVersion = "0.44"
 
 //Due to vulnerabilities
-val nettycommonVersion = "4.1.115.Final"
+val nettycommonVersion = "4.1.116.Final"
 val snappyJavaVersion = "1.1.10.7"
 val commonsCodecVersion = "1.17.1"
 
