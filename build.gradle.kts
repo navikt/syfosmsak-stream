@@ -15,7 +15,7 @@ val logbackVersion = "1.5.16"
 val prometheusVersion = "0.16.0"
 val junitJupiterVersion = "5.11.4"
 val ioMockVersion = "1.13.16"
-val kotlinVersion = "2.1.0"
+val kotlinVersion = "2.1.10"
 val ktfmtVersion = "0.44"
 
 //Due to vulnerabilities
@@ -26,7 +26,7 @@ val commonsCodecVersion = "1.17.2"
 
 plugins {
     id("application")
-    kotlin("jvm") version "2.1.0"
+    kotlin("jvm") version "2.1.10"
     id("com.diffplug.spotless") version "7.0.2"
     id("com.gradleup.shadow") version "8.3.5"
 }
