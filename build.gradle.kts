@@ -19,7 +19,7 @@ val kotlinVersion = "2.1.10"
 val ktfmtVersion = "0.44"
 
 //Due to vulnerabilities
-val nettycommonVersion = "4.1.117.Final"
+val nettycommonVersion = "4.1.118.Final"
 val snappyJavaVersion = "1.1.10.7"
 val commonsCodecVersion = "1.18.0"
 
