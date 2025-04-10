@@ -22,6 +22,9 @@ import org.apache.kafka.streams.StreamsBuilder
 import org.apache.kafka.streams.StreamsConfig
 import org.apache.kafka.streams.kstream.Consumed
 import org.apache.kafka.streams.kstream.JoinWindows
+import org.apache.kafka.streams.processor.api.ContextualProcessor
+import org.apache.kafka.streams.processor.api.ProcessorSupplier
+import org.apache.kafka.streams.processor.api.Record
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -57,6 +60,33 @@ fun main() {
     applicationServer.start()
 }
 
+class HeaderFilterProcessor : ContextualProcessor<String, String, String, String>() {
+
+    companion object {
+        const val PROCESSING_TARGET_HEADER: String = "processing-target"
+        const val TSM_TARGET: String = "tsm"
+        private val logger = LoggerFactory.getLogger(HeaderFilterProcessor::class.java)
+    }
+
+    override fun process(record: Record<String, String>) {
+        val header = record.headers().lastHeader(PROCESSING_TARGET_HEADER)?.value()?.toString()
+        logger.info(
+            "Processing target is $header for topic ${
+                context().recordMetadata().get().topic()
+            }",
+        )
+        if (header == TSM_TARGET) {
+            logger.info(
+                "Processing target is $header skipping for topic ${
+                    context().recordMetadata().get().topic()
+                }",
+            )
+        } else {
+            context().forward(record)
+        }
+    }
+}
+
 fun startKafkaAivenStream(env: Environment, applicationState: ApplicationState) {
     val streamsBuilder = StreamsBuilder()
     val streamProperties =
@@ -74,6 +104,7 @@ fun startKafkaAivenStream(env: Environment, applicationState: ApplicationState) 
                 ),
                 Consumed.with(Serdes.String(), Serdes.String()),
             )
+            .process(ProcessorSupplier { HeaderFilterProcessor() })
             .filter { _, value ->
                 value?.let { objectMapper.readValue<ReceivedSykmelding>(value).skalBehandles() }
                     ?: true
@@ -87,6 +118,7 @@ fun startKafkaAivenStream(env: Environment, applicationState: ApplicationState) 
                 ),
                 Consumed.with(Serdes.String(), Serdes.String()),
             )
+            .process(ProcessorSupplier { HeaderFilterProcessor() })
             .filter { _, value ->
                 !(value?.let {
                     objectMapper.readValue<ValidationResult>(value).ruleHits.any {
