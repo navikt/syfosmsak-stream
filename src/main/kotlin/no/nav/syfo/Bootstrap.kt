@@ -69,7 +69,7 @@ class HeaderFilterProcessor : ContextualProcessor<String, String, String, String
     }
 
     override fun process(record: Record<String, String>) {
-        val header = record.headers().lastHeader(PROCESSING_TARGET_HEADER)?.value()?.toString()
+        val header = record.headers().lastHeader(PROCESSING_TARGET_HEADER)?.value()?.toString(Charsets.UTF_8)
         logger.info(
             "Processing target is $header for topic ${
                 context().recordMetadata().get().topic()
